@@ -37,9 +37,26 @@ const add = (number) => {
   currentAction = currentAction.toString() + number.toString();
 };
 
+const chooseAction = (operator) => {
+  if (currentAction === '') {
+    alert('First choose the number!');
+    return;
+  }
+  action = operator;
+  previousAction = currentAction;
+  currentAction = '';
+};
+
 numbers.forEach((number) => {
   number.addEventListener('click', () => {
     add(number.innerText);
+    updateResult();
+  });
+});
+
+operators.forEach((operator) => {
+  operator.addEventListener('click', () => {
+    chooseAction(operator.innerText);
     updateResult();
   });
 });
