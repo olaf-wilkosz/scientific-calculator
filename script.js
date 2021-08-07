@@ -12,12 +12,17 @@ let action = undefined;
 
 const updateResult = () => {
   currentResult.innerText = currentAction;
-  previousResult.innerText = previousAction;
+  if (action != null) {
+    previousResult.innerText = previousAction + action;
+  } else {
+    previousResult.innerText = '';
+  }
 };
 
 const clearAll = () => {
   currentAction = '';
   previousAction = '';
+  action = undefined;
   updateResult();
 };
 
