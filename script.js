@@ -16,6 +16,14 @@ const updateResult = () => {
 };
 
 const add = (number) => {
+  if (number === '•') {
+    if (currentResult === '') {
+      currentResult = '0';
+    } else if (currentResult.includes('.')) {
+      return;
+    }
+    number = '.';
+  }
   currentResult = currentResult.toString() + number.toString();
 };
 
