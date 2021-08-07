@@ -15,6 +15,17 @@ const updateResult = () => {
   previousActionResult.innerText = previousResult;
 };
 
+const clearAll = () => {
+  currentResult = '';
+  previousResult = '';
+  updateResult();
+};
+
+const deleteLast = () => {
+  console.log('currentActionResult:', currentActionResult);
+  currentResult = currentResult.slice(0, -1);
+};
+
 const add = (number) => {
   if (number === '•') {
     if (currentResult === '') {
@@ -32,4 +43,14 @@ numbers.forEach((number) => {
     add(number.innerText);
     updateResult();
   });
+});
+
+allClear.addEventListener('click', () => {
+  clearAll();
+  updateResult();
+});
+
+clearEntry.addEventListener('click', () => {
+  deleteLast();
+  updateResult();
 });
