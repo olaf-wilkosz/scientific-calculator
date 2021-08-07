@@ -3,39 +3,38 @@ const operators = document.querySelectorAll('.operator');
 const allClear = document.querySelector('.all-clear');
 const clearEntry = document.querySelector('.clear-entry');
 const equals = document.querySelector('.equals');
-const previousActionResult = document.querySelector('.previous-result');
-const currentActionResult = document.querySelector('.current-result');
+const previousResult = document.querySelector('.previous-result');
+const currentResult = document.querySelector('.current-result');
 
-let currentResult = '';
-let previousResult = '';
+let currentAction = '';
+let previousAction = '';
 let action = undefined;
 
 const updateResult = () => {
-  currentActionResult.innerText = currentResult;
-  previousActionResult.innerText = previousResult;
+  currentResult.innerText = currentAction;
+  previousResult.innerText = previousAction;
 };
 
 const clearAll = () => {
-  currentResult = '';
-  previousResult = '';
+  currentAction = '';
+  previousAction = '';
   updateResult();
 };
 
 const deleteLast = () => {
-  console.log('currentActionResult:', currentActionResult);
-  currentResult = currentResult.slice(0, -1);
+  currentAction = currentAction.toString().slice(0, -1);
 };
 
 const add = (number) => {
   if (number === '•') {
-    if (currentResult === '') {
-      currentResult = '0';
-    } else if (currentResult.includes('.')) {
+    if (currentAction === '') {
+      currentAction = '0';
+    } else if (currentAction.includes('.')) {
       return;
     }
     number = '.';
   }
-  currentResult = currentResult.toString() + number.toString();
+  currentAction = currentAction.toString() + number.toString();
 };
 
 numbers.forEach((number) => {
