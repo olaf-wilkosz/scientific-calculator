@@ -66,6 +66,11 @@ const count = () => {
       action = previous * current;
       break;
     case '÷':
+      if (current === 0) {
+        alert('Division by zero forbidden!');
+        clearAll();
+        return;
+      }
       action = previous / current;
       break;
     case '√':
@@ -94,6 +99,15 @@ const chooseAction = (operator) => {
     return;
   }
   if (previousAction !== '') {
+    const previous = previousResult.innerText;
+    if (
+      currentAction.toString() === '0' &&
+      previous[previous.length - 1] === '÷'
+    ) {
+      alert('Division by zero forbidden!');
+      clearAll();
+      return;
+    }
     count();
   }
   action = operator;
