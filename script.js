@@ -42,10 +42,59 @@ const add = (number) => {
   currentAction = currentAction.toString() + number.toString();
 };
 
+const count = () => {
+  let operation;
+  if (!previousAction || !currentAction) {
+    return;
+  }
+
+  const previous = parseFloat(previousAction);
+  const current = parseFloat(currentAction);
+
+  if (isNaN(previous) || isNaN(current)) {
+    return;
+  }
+
+  switch (action) {
+    case '+':
+      action = previous + current;
+      break;
+    case '-':
+      action = previous - current;
+      break;
+    case '×':
+      action = previous * current;
+      break;
+    case '÷':
+      action = previous / current;
+      break;
+    case '√':
+      action = Math.pow(previous, 1 / current);
+      break;
+    case '%':
+      action = (previous / 100) * current;
+      break;
+    case '^':
+      action = Math.pow(previous, current);
+      break;
+    case 'log':
+      action = Math.log(previous) / Math.log(current);
+      break;
+    default:
+      return;
+  }
+
+  currentAction = action;
+  operation = undefined;
+  previousAction = '';
+};
+
 const chooseAction = (operator) => {
   if (currentAction === '') {
-    alert('First choose the number!');
     return;
+  }
+  if (previousAction !== '') {
+    count();
   }
   action = operator;
   previousAction = currentAction;
@@ -73,5 +122,10 @@ allClear.addEventListener('click', () => {
 
 clearEntry.addEventListener('click', () => {
   deleteLast();
+  updateResult();
+});
+
+equals.addEventListener('click', () => {
+  count();
   updateResult();
 });
